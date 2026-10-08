@@ -1,0 +1,384 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: black;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    min-height: 100vh;
+}
+
+button{
+    cursor: pointer;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.sidebar{
+    width: 230px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background-color: black;
+    border-right: 1px solid gray;
+    padding: 30px 20px;
+}
+
+.sidebar h1{
+    color: #f2a900;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+
+.sidebar nav{
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar button{
+    background-color: transparent;
+    color: #adb5bd;
+    border: none;
+    border-radius: 3px;
+    text-align: left;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+}
+
+.sidebar button:hover{
+    background-color: #1a1a1a;
+    color: white;
+}
+
+
+.sidebar button.active{
+    background-color: #f2a900;
+    color: black;
+    font-weight: bold;
+}
+
+
+main{
+    flex: 1;
+    padding: 40px;
+    overflow-x: auto;
+    opacity: 0;
+    animation-name: opachange;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+
+.top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+main h2{
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 40px;
+}
+
+
+.primary{
+    background-color: #f2a900;
+    color: black;
+    border: 1px solid #f2a900;
+    border-radius: 3px;
+    padding: 12px 22px;
+    font-weight: bold;
+}
+
+.primary:hover{
+    animation-name: change;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card{
+    height: 180px;
+    width: 230px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid gray;
+    border-left: 5px solid #f2a900;
+    border-radius: 15px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card:hover{
+    animation-name: colorfill;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.card span{
+    font-size: 15px;
+    opacity: 0.7;
+}
+
+.card strong{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 32px;
+}
+
+/* ---------- Tables ---------- */
+table{
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid gray;
+}
+
+th, td{
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #333333;
+}
+
+th{
+    background-color: #1a1a1a;
+    color: #f2a900;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+}
+
+tr:hover td{
+    background-color: #111111;
+}
+
+/* Edit and Delete buttons inside the table */
+td button{
+    background-color: transparent;
+    color: white;
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 6px 12px;
+    margin-right: 8px;
+}
+
+td button:hover{
+    animation-name: change;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+td button.del{
+    color: #ff6b6b;
+}
+
+td button.del:hover{
+    animation-name: changered;
+}
+
+.paid{
+    color: #51cf66;
+    font-weight: bold;
+}
+
+.due{
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.empty{
+    padding: 60px;
+    text-align: center;
+    color: #adb5bd;
+    border: 1px dashed gray;
+    border-radius: 15px;
+}
+
+/* ---------- Popup form ---------- */
+dialog{
+    background-color: black;
+    color: white;
+    border: 1px solid gray;
+    border-radius: 15px;
+    padding: 30px;
+    width: 420px;
+    max-width: 92%;
+    margin: auto;
+}
+
+dialog::backdrop{
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+dialog h3{
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+label{
+    display: block;
+    color: #adb5bd;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+input, select{
+    width: 100%;
+    margin-top: 6px;
+    padding: 12px;
+    background-color: #111111;
+    color: white;
+    border: 1px solid gray;
+    border-radius: 3px;
+    font-size: 15px;
+}
+
+input:focus, select:focus{
+    outline: none;
+    border: 1px solid #f2a900;
+}
+
+.actions{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.actions button[type="button"]{
+    background-color: transparent;
+    color: white;
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 12px 22px;
+}
+
+/* ---------- Animations (same idea as your file) ---------- */
+
+/* button fills white on hover */
+@keyframes change{
+    from{
+        background-color: transparent;
+        color: white;
+    }
+    to{
+        background-color: white;
+        color: black;
+    }
+}
+
+/* delete button fills red on hover */
+@keyframes changered{
+    from{
+        background-color: transparent;
+        color: #ff6b6b;
+    }
+    to{
+        background-color: #ff6b6b;
+        color: black;
+    }
+}
+
+/* dashboard card fills white on hover */
+@keyframes colorfill{
+    from{
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+    to{
+        background-color: white;
+        color: black;
+    }
+}
+
+/* page fades in when it loads */
+@keyframes opachange{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+/* ---------- Mobile view ---------- */
+@media (max-width: 700px){
+    body{
+        flex-direction: column;
+    }
+    .sidebar{
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid gray;
+        padding: 20px;
+    }
+    .sidebar h1{
+        margin-bottom: 15px;
+    }
+    .sidebar nav{
+        flex-direction: row;
+        overflow-x: auto;
+    }
+    main{
+        padding: 20px;
+    }
+    main h2{
+        font-size: 28px;
+    }
+}
+
+/* ---------- Error popup (used for "Insufficient balance" etc.) ---------- */
+#messageBox{
+    width: 380px;
+    border: 1px solid #ff6b6b;
+    animation-name: popup;
+    animation-duration: 0.25s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+}
+
+#messageBox h3{
+    color: #ff6b6b;
+}
+
+#messageBox p{
+    color: #adb5bd;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* popup grows a little when it opens */
+@keyframes popup{
+    from{
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
+}

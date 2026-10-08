@@ -1,516 +1,75 @@
-/* ---------- General ---------- */
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body{
-    background-color: #0f0816;
-    color: #f5eefa;
-    font-family: Poppins, Arial, sans-serif;
-    color-scheme: dark;
-    display: flex;
-    min-height: 100vh;
-}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:#0d0813}
+body{font-family:Poppins,Arial,sans-serif;color:#f5eef9;background:#0d0813}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+body:before,body:after{content:"";position:fixed;z-index:-2;border-radius:50%;filter:blur(120px);pointer-events:none}
+body:before{width:520px;height:520px;right:-150px;top:-180px;background:#ff4f91;opacity:.15}
+body:after{width:600px;height:600px;left:180px;bottom:-300px;background:#ffb347;opacity:.10}
 
-button{
-    cursor: pointer;
-    font-size: 15px;
-    font-family: Poppins, Arial, sans-serif;
-}
+#app{min-height:100vh}
+.app-layout{min-height:100vh;display:flex;width:100%}
+.sidebar{width:258px;flex:0 0 258px;min-height:100vh;padding:25px 16px;position:sticky;top:0;align-self:flex-start;background:rgba(25,17,31,.88);border-right:1px solid rgba(255,255,255,.09);backdrop-filter:blur(20px);display:flex;flex-direction:column}
+.brand{padding:8px 12px 28px}.brand-logo{font-size:32px}.brand h1{font:normal 30px "DM Serif Display",serif;color:#ffb347;margin-top:6px}.brand p{font-size:12px;color:#aa9db5;margin-top:2px}
+.nav{display:flex;flex-direction:column;gap:4px}.nav button{border:0;background:transparent;color:#bdb0c8;text-align:left;border-radius:13px;padding:13px 14px;display:flex;align-items:center;gap:11px;font-size:13px}.nav button:hover{background:rgba(255,255,255,.06);color:#fff}.nav button.active{background:linear-gradient(135deg,#ffb347,#ff6b9d);color:#170b18;font-weight:700;box-shadow:0 8px 22px rgba(255,107,157,.18)}
+.nav-icon{width:24px;text-align:center;font-size:17px}
+.sidebar-spacer{flex:1}.account{border-top:1px solid rgba(255,255,255,.09);padding:16px 8px 5px;display:flex;align-items:center;gap:10px}.avatar{width:39px;height:39px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#ffb347,#ff6b9d);color:#1a0b22;font-weight:700}.account-info{min-width:0}.account-info strong{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.account-info span{font-size:10px;color:#9f92aa;text-transform:capitalize}.logout{margin-top:4px;background:transparent;border:0;color:#bdb0c8;padding:10px 8px;text-align:left;border-radius:10px}.logout:hover{background:rgba(255,255,255,.06);color:#fff}
 
-/* ---------- Glowing background blobs ---------- */
-body::before{
-    content: "";
-    position: fixed;
-    top: -150px;
-    right: -100px;
-    width: 500px;
-    height: 500px;
-    background-color: #ff6b9d;
-    opacity: 0.25;
-    border-radius: 50%;
-    filter: blur(110px);
-    z-index: -1;
-}
+.main{flex:1;min-width:0;padding:32px 36px 28px;overflow:hidden}.topbar{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:26px}.eyebrow{font-size:10px;letter-spacing:1.6px;color:#ffb347;font-weight:700}.topbar h2{font:normal 44px "DM Serif Display",serif;line-height:1.05;margin-top:4px}.subtitle{color:#9f92aa;font-size:13px;margin-top:6px}.top-actions{display:flex;gap:9px;align-items:center}.btn{border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.045);color:#f5eef9;border-radius:11px;padding:10px 15px;font-size:12px}.btn:hover{background:rgba(255,255,255,.09)}.btn-primary{border:0;background:linear-gradient(135deg,#ffb347,#ff6b9d);color:#1b0b18;font-weight:700;border-radius:11px;padding:11px 17px;font-size:12px}.btn-danger{color:#ff9ab0;border-color:rgba(255,154,176,.3)}.btn-success{color:#65e3b8;border-color:rgba(101,227,184,.3)}
+.content{min-height:calc(100vh - 160px)}
+.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.stat{padding:20px;border-radius:18px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.035);min-width:0}.stat-label{color:#a99bb5;font-size:11px;display:flex;justify-content:space-between;gap:8px}.stat-icon{font-size:16px}.stat-value{font:normal 31px "DM Serif Display",serif;margin-top:15px}.stat-note{font-size:10px;color:#7f748a;margin-top:4px}
+.two-col{grid-template-columns:1.25fr .75fr;margin-top:16px}.three-col{grid-template-columns:repeat(3,1fr);margin-top:16px}.panel{border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.035);border-radius:18px;padding:20px;min-width:0}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.panel-title{font:normal 22px "DM Serif Display",serif}.panel-muted{color:#8f829a;font-size:11px}
+.quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.quick{padding:14px;border-radius:13px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);color:#ddd3e2;text-align:left}.quick:hover{background:rgba(255,255,255,.07)}.quick b{display:block;color:#fff;font-size:12px}.quick span{display:block;color:#8f829a;font-size:10px;margin-top:3px}
+.list{display:flex;flex-direction:column}.list-row{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06)}.list-row:last-child{border-bottom:0}.list-main{min-width:0}.list-main strong{font-size:12px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.list-main small{color:#8f829a;font-size:10px;display:block;margin-top:3px}.list-right{text-align:right;white-space:nowrap}.list-right b{font-size:12px}.list-right small{display:block;color:#8f829a;font-size:9px;margin-top:3px}
 
-body::after{
-    content: "";
-    position: fixed;
-    bottom: -180px;
-    left: 200px;
-    width: 550px;
-    height: 550px;
-    background-color: #ffb347;
-    opacity: 0.18;
-    border-radius: 50%;
-    filter: blur(120px);
-    z-index: -1;
-}
+.badge{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;font-size:9px;font-weight:700}.badge.pending{color:#ffca72;background:rgba(255,179,71,.11)}.badge.confirmed{color:#69e3b8;background:rgba(91,224,179,.11)}.badge.completed{color:#8bc8ff;background:rgba(91,160,255,.11)}.badge.cancelled{color:#ff91a7;background:rgba(255,107,157,.11)}.badge.paid{color:#69e3b8;background:rgba(91,224,179,.11)}.badge.partial{color:#ffca72;background:rgba(255,179,71,.11)}
 
-/* ---------- Sidebar (floating glass panel) ---------- */
-.sidebar{
-    width: 250px;
-    height: calc(100vh - 32px);
-    margin: 16px;
-    position: sticky;
-    top: 16px;
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    padding: 28px 18px;
-    backdrop-filter: blur(20px);
-}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.search{width:min(310px,100%);background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#fff;outline:0}.search:focus{border-color:#ffb347}.filter{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);color:#ddd;border-radius:10px;padding:10px 12px}
+.table-wrap{overflow:auto;border:1px solid rgba(255,255,255,.07);border-radius:14px}.table{width:100%;border-collapse:collapse;min-width:720px}.table th{font-size:9px;color:#85788f;text-transform:uppercase;letter-spacing:.7px;text-align:left;padding:12px;background:rgba(255,255,255,.025)}.table td{font-size:11px;padding:13px 12px;border-top:1px solid rgba(255,255,255,.055);vertical-align:middle}.table tr:hover td{background:rgba(255,255,255,.025)}.actions{display:flex;gap:6px;flex-wrap:wrap}.empty{text-align:center;color:#8f829a;padding:45px 15px;font-size:12px}.empty strong{color:#fff}
 
-.brand{
-    margin-bottom: 36px;
-    padding-left: 8px;
-}
+.progress{height:6px;border-radius:10px;background:rgba(255,255,255,.07);overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,#ffb347,#ff6b9d);border-radius:10px}
+.mini-bar{margin:11px 0}.mini-bar-head{display:flex;justify-content:space-between;font-size:10px;color:#a99bb5;margin-bottom:6px}.mini-bar-head b{color:#fff}
 
-.logo{
-    font-size: 32px;
-}
+.customer-hero{display:flex;justify-content:space-between;align-items:center;gap:25px;padding:30px;border-radius:22px;border:1px solid rgba(255,255,255,.09);background:linear-gradient(120deg,rgba(255,179,71,.13),rgba(255,107,157,.08),rgba(255,255,255,.025))}.customer-hero h3{font:normal 37px "DM Serif Display",serif;margin:7px 0}.customer-hero p{color:#9f92aa;font-size:12px;max-width:600px;margin-bottom:19px}.hero-food{font-size:86px}.customer-cards{grid-template-columns:repeat(3,1fr);margin-top:16px}.food-grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}.food-card{padding:18px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.035);border-radius:17px}.food-card:hover{border-color:rgba(255,179,71,.35);transform:translateY(-2px)}.food-icon{font-size:36px}.food-card .cat{font-size:9px;color:#ffb347;text-transform:uppercase;letter-spacing:1px}.food-card h3{font-size:15px;margin:5px 0}.food-card strong{font-size:15px}.food-card small{font-size:9px;color:#8f829a;font-weight:400}.food-card button{width:100%;margin-top:12px}
 
-.sidebar h1{
-    font-family: "DM Serif Display", Georgia, serif;
-    font-weight: normal;
-    font-size: 28px;
-    color: #ffb347;
-    margin-top: 8px;
-}
+.booking-grid{grid-template-columns:1.15fr .85fr}.field{display:block;color:#a99bb5;font-size:10px;margin-bottom:13px}.field input,.field select,.field textarea{width:100%;margin-top:6px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:11px;color:#fff;outline:0}.field select option{background:#1b111f}.field input:focus,.field select:focus,.field textarea:focus{border-color:#ffb347}.estimate{display:flex;justify-content:space-between;align-items:center;padding:14px;border-radius:12px;background:rgba(255,179,71,.07);margin:5px 0 14px}.estimate strong{font:normal 24px "DM Serif Display",serif;color:#ffb347}.order-card{padding:18px;border-radius:16px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.035);margin-bottom:10px}.order-head{display:flex;justify-content:space-between;gap:12px}.order-head h3{font:normal 20px "DM Serif Display",serif}.order-head p{font-size:10px;color:#8f829a;margin-top:3px}.order-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;padding-top:13px;border-top:1px solid rgba(255,255,255,.06)}.order-meta span{font-size:9px;color:#8f829a}.order-meta b{display:block;color:#fff;font-size:12px;margin-top:3px}
 
-.tagline{
-    font-size: 13px;
-    color: #a99bb8;
-}
+.auth-screen{min-height:100vh;display:grid;place-items:center;padding:25px}.auth-layout{width:min(1000px,95vw);display:grid;grid-template-columns:1fr 430px;gap:60px;align-items:center}.auth-copy .plate{font-size:66px}.auth-copy h1{font:normal 68px "DM Serif Display",serif;color:#ffb347}.auth-copy p{color:#9f92aa;font-size:13px;max-width:420px}.auth-card{padding:30px;border-radius:23px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);backdrop-filter:blur(20px);box-shadow:0 25px 70px rgba(0,0,0,.35)}.auth-tabs{display:flex;padding:4px;border-radius:11px;background:rgba(255,255,255,.045);margin-bottom:23px}.auth-tabs button{flex:1;border:0;background:transparent;color:#91839c;padding:10px;border-radius:8px}.auth-tabs button.active{background:rgba(255,255,255,.1);color:#fff}.auth-card h2{font:normal 28px "DM Serif Display",serif}.auth-card .intro{font-size:11px;color:#8f829a;margin:5px 0 20px}.auth-error{padding:10px;border-radius:9px;color:#ff9ab0;background:rgba(255,107,157,.08);border:1px solid rgba(255,107,157,.2);font-size:10px;margin-bottom:12px}.demo{font-size:9px;color:#7f7488;margin-top:15px;padding:10px;border-radius:9px;background:rgba(255,179,71,.05)}.demo b{color:#ffb347}
 
-.sidebar nav{
-    display: flex;
-    flex-direction: column;
-}
+dialog{border:1px solid rgba(255,255,255,.12);border-radius:20px;background:#1a1020;color:#f5eef9;padding:25px;width:min(500px,92vw);margin:auto;box-shadow:0 30px 80px rgba(0,0,0,.6)}dialog::backdrop{background:rgba(7,3,10,.75);backdrop-filter:blur(5px)}dialog h3{font:normal 26px "DM Serif Display",serif;margin-bottom:5px}dialog p{color:#9f92aa;font-size:11px;line-height:1.6}.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:17px}.confirm-box{text-align:center}.confirm-icon{font-size:38px;margin-bottom:7px}
 
-.sidebar button{
-    background-color: transparent;
-    color: #c9bdd6;
-    border: none;
-    border-radius: 14px;
-    text-align: left;
-    padding: 13px 16px;
-    margin-bottom: 6px;
-    transition: background-color 0.2s, color 0.2s;
-}
+.toast{position:fixed;right:22px;bottom:22px;padding:12px 15px;border-radius:11px;background:#241728;border:1px solid rgba(255,255,255,.12);box-shadow:0 15px 35px #0008;font-size:11px;z-index:20}
 
-.sidebar button:hover{
-    background-color: rgba(255, 255, 255, 0.08);
-    color: white;
-}
+@media(max-width:1050px){.stats{grid-template-columns:repeat(2,1fr)}.two-col,.booking-grid{grid-template-columns:1fr}.auth-layout{grid-template-columns:1fr;gap:25px}.auth-copy{text-align:center}.auth-copy h1{font-size:50px}.auth-copy p{margin:auto}.auth-copy .plate{font-size:45px}}
+@media(max-width:760px){.app-layout{display:block}.sidebar{width:100%;min-height:auto;position:relative;border-right:0;border-bottom:1px solid rgba(255,255,255,.09);padding:15px}.brand{padding-bottom:12px}.brand-logo{display:none}.brand h1{font-size:24px}.nav{flex-direction:row;overflow:auto}.nav button{white-space:nowrap}.nav button.active{box-shadow:none}.account,.logout{display:none}.main{padding:23px 16px}.topbar{align-items:flex-start;flex-direction:column}.topbar h2{font-size:37px}.top-actions{width:100%}.top-actions>*{flex:1}.customer-hero{padding:22px}.hero-food{display:none}.customer-cards,.three-col{grid-template-columns:1fr}.quick-grid{grid-template-columns:1fr}.order-meta{grid-template-columns:1fr 1fr}}
 
-.icon{
-    display: inline-block;
-    width: 28px;
+/* ---------- Customer payment UI ---------- */
+.order-payment{
+    margin-top:16px;
+    padding:14px 16px;
+    border:1px solid rgba(255,179,71,.18);
+    border-radius:16px;
+    background:rgba(255,179,71,.06);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
 }
+.order-payment div{display:flex;flex-direction:column;gap:4px}
+.order-payment small{color:#a99bb8}
+.order-payment.paid-state{border-color:rgba(91,224,179,.2);background:rgba(91,224,179,.06)}
+.payment-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+.payment-summary span{padding:12px;border-radius:12px;background:rgba(255,255,255,.05);color:#a99bb8;font-size:12px}
+.payment-summary strong{display:block;color:#fff;font-size:17px;margin-top:5px}
+.payment-demo{padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);margin-bottom:8px}
+.payment-demo strong{display:block;font-size:13px}
+.payment-demo small{display:block;color:#8f829a;margin-top:4px;line-height:1.5}
+@media(max-width:700px){.order-payment{align-items:flex-start;flex-direction:column}.payment-summary{grid-template-columns:1fr}}
 
-/* the page you are currently on */
-.sidebar button.active{
-    background-image: linear-gradient(135deg, #ffb347, #ff6b9d);
-    color: #1a0b22;
-    font-weight: 600;
-}
-
-.sidebar-note{
-    margin-top: auto;
-    padding-left: 8px;
-    font-size: 12px;
-    color: #a99bb8;
-}
-
-/* ---------- Main area ---------- */
-main{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 40px 36px;
-    overflow-x: auto;
-    opacity: 0;
-    animation-name: opachange;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-}
-
-.top{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 36px;
-}
-
-.welcome{
-    color: #ffb347;
-    font-size: 35px;
-    font-weight: 500;
-    margin-bottom: 6px;
-}
-
-main h2{
-    font-family: "DM Serif Display", Georgia, serif;
-    font-weight: normal;
-    font-size: 46px;
-}
-
-.subtitle{
-    color: #a99bb8;
-    font-size: 14px;
-    margin-top: 4px;
-}
-
-/* Add new / Save button */
-.primary{
-    background-image: linear-gradient(135deg, #ffb347, #ff6b9d);
-    color: #1a0b22;
-    border: none;
-    border-radius: 30px;
-    padding: 13px 26px;
-    font-weight: 600;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.primary:hover{
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
-}
-
-/* content takes all the free space, so the quotes always sit at the bottom */
-#content{
-    flex: 1;
-}
-
-/* ---------- Food quotes (bottom of every page) ---------- */
-.quotes{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 50px;
-    padding-top: 28px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.quotes p{
-    flex: 1;
-    min-width: 200px;
-    text-align: center;
-    font-family: "DM Serif Display", Georgia, serif;
-    font-style: italic;
-    font-size: 17px;
-    line-height: 1.5;
-    color: #a99bb8;
-}
-
-/* ---------- Dashboard cards ---------- */
-.cards{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 22px;
-}
-
-.card{
-    height: 170px;
-    width: 230px;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 22px;
-    transition: transform 0.25s, border-color 0.25s;
-}
-
-.card:hover{
-    transform: translateY(-6px);
-    border-color: rgba(255, 179, 71, 0.7);
-}
-
-.card span{
-    font-size: 14px;
-    color: #c9bdd6;
-}
-
-.card strong{
-    font-family: "DM Serif Display", Georgia, serif;
-    font-weight: normal;
-    font-size: 38px;
-}
-
-/* every card gets its own colour */
-.card:nth-child(1){
-    background-image: linear-gradient(145deg, rgba(157, 140, 255, 0.3), rgba(255, 255, 255, 0.03));
-}
-.card:nth-child(2){
-    background-image: linear-gradient(145deg, rgba(255, 107, 157, 0.28), rgba(255, 255, 255, 0.03));
-}
-.card:nth-child(3){
-    background-image: linear-gradient(145deg, rgba(255, 179, 71, 0.28), rgba(255, 255, 255, 0.03));
-}
-.card:nth-child(4){
-    background-image: linear-gradient(145deg, rgba(91, 224, 179, 0.25), rgba(255, 255, 255, 0.03));
-}
-.card:nth-child(5){
-    background-image: linear-gradient(145deg, rgba(255, 107, 107, 0.28), rgba(255, 255, 255, 0.03));
-}
-
-/* ---------- Tables (every row is a rounded strip) ---------- */
-table{
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 10px;
-}
-
-th{
-    text-align: left;
-    padding: 0 16px 4px 16px;
-    font-weight: 500;
-    font-size: 14px;
-    color: #a99bb8;
-}
-
-td{
-    padding: 16px;
-    text-align: left;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-td:first-child{
-    border-left: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px 0 0 16px;
-}
-
-td:last-child{
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 0 16px 16px 0;
-}
-
-tr:hover td{
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Edit and Delete buttons inside the table */
-td button{
-    background-color: transparent;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 20px;
-    padding: 6px 16px;
-    margin-right: 8px;
-    font-size: 13px;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-td button:hover{
-    background-color: white;
-    color: #1a0b22;
-}
-
-td button.del{
-    color: #ff8fa3;
-    border-color: rgba(255, 143, 163, 0.5);
-}
-
-td button.del:hover{
-    background-color: #ff8fa3;
-    color: #1a0b22;
-}
-
-.paid{
-    color: #5be0b3;
-    font-weight: 600;
-}
-
-.due{
-    color: #ff8fa3;
-    font-weight: 600;
-}
-
-.empty{
-    padding: 70px 20px;
-    text-align: center;
-    color: #a99bb8;
-    background-color: rgba(255, 255, 255, 0.03);
-    border: 1px dashed rgba(255, 255, 255, 0.25);
-    border-radius: 24px;
-}
-
-/* ---------- Popup form ---------- */
-dialog{
-    background-color: #1a1024;
-    color: #f5eefa;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 24px;
-    padding: 32px;
-    width: 440px;
-    max-width: 92%;
-    margin: auto;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-}
-
-dialog::backdrop{
-    background-color: rgba(10, 4, 16, 0.7);
-    backdrop-filter: blur(6px);
-}
-
-dialog h3{
-    font-family: "DM Serif Display", Georgia, serif;
-    font-weight: normal;
-    font-size: 28px;
-    margin-bottom: 22px;
-}
-
-label{
-    display: block;
-    color: #a99bb8;
-    font-size: 14px;
-    margin-bottom: 16px;
-}
-
-input, select{
-    width: 100%;
-    margin-top: 6px;
-    padding: 13px 14px;
-    background-color: rgba(255, 255, 255, 0.06);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    font-size: 15px;
-    font-family: Poppins, Arial, sans-serif;
-}
-
-select option{
-    background-color: #1a1024;
-    color: white;
-}
-
-input:focus, select:focus{
-    outline: none;
-    border: 1px solid #ffb347;
-    box-shadow: 0 0 0 3px rgba(255, 179, 71, 0.2);
-}
-
-.actions{
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.actions button[type="button"]{
-    background-color: transparent;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 30px;
-    padding: 13px 26px;
-}
-
-.actions button[type="button"]:hover{
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* ---------- Error popup (Insufficient balance etc.) ---------- */
-#messageBox{
-    width: 390px;
-    border: 1px solid rgba(255, 107, 107, 0.6);
-    animation-name: popup;
-    animation-duration: 0.25s;
-    animation-timing-function: ease-out;
-    animation-iteration-count: 1;
-}
-
-#messageBox h3{
-    color: #ff8fa3;
-}
-
-#messageBox p{
-    color: #c9bdd6;
-    line-height: 1.6;
-    margin-bottom: 22px;
-}
-
-/* ---------- Animations ---------- */
-
-/* page fades in when it loads */
-@keyframes opachange{
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-    }
-}
-
-/* error popup grows a little when it opens */
-@keyframes popup{
-    from{
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    to{
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* people who turn off animations in their device settings get none */
-@media (prefers-reduced-motion: reduce){
-    main, #messageBox{
-        animation: none;
-        opacity: 1;
-    }
-    .card, .primary{
-        transition: none;
-    }
-}
-
-/* ---------- Mobile view ---------- */
-@media (max-width: 700px){
-    body{
-        flex-direction: column;
-    }
-    .sidebar{
-        width: auto;
-        height: auto;
-        position: static;
-        margin: 12px;
-        padding: 20px 14px;
-    }
-    .brand{
-        margin-bottom: 18px;
-    }
-    .sidebar nav{
-        flex-direction: row;
-        overflow-x: auto;
-    }
-    .sidebar button{
-        white-space: nowrap;
-    }
-    .sidebar-note{
-        display: none;
-    }
-    main{
-        padding: 20px 16px;
-    }
-    main h2{
-        font-size: 34px;
-    }
-    .top{
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-    }
-    .card{
-        width: 100%;
-    }
-}
+/* ---------- Date availability ---------- */
+.date-msg{display:block;font-size:10px;margin-top:6px;min-height:14px}
+.date-msg.date-ok{color:#65e3b8}
+.date-msg.date-bad{color:#ff9ab0}
+.field input.invalid{border-color:#ff9ab0}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed}

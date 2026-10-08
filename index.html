@@ -1,69 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Annapoorna Catering - Manager</title>
-
-  <!-- Fonts: Poppins for text, DM Serif Display for headings -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Annapoorna Catering</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="app"></div>
 
-  <!-- Sidebar: one button per page -->
-  <aside class="sidebar">
-    <div class="brand">
-      <span class="logo">🍽️</span>
-      <h1>Annapoorna</h1>
-      <p class="tagline">Catering manager</p>
-    </div>
-
-    <nav id="nav">
-      <button data-page="dashboard" class="active"><span class="icon">📊</span> Dashboard</button>
-      <button data-page="customers"><span class="icon">👥</span> Customers</button>
-      <button data-page="menus"><span class="icon">🍛</span> Menus</button>
-      <button data-page="events"><span class="icon">🎉</span> Events</button>
-      <button data-page="orders"><span class="icon">🧾</span> Orders</button>
-      <button data-page="payments"><span class="icon">💳</span> Payments</button>
-    </nav>
-
-    <p class="sidebar-note">Your data is saved in this browser.</p>
-  </aside>
-
-  <!-- Main area: JS fills this depending on the selected page -->
-  <main>
-    <header class="top">
-      <div>
-        <p class="welcome">Welcome to Annapoorna Catering 🙏</p>
-        <h2 id="title"></h2>
-        <p class="subtitle">Events, menus, orders and payments in one place.</p>
-      </div>
-      <button id="addBtn" class="primary">+ Add new</button>
-    </header>
-    <section id="content"></section>
-
-    <!-- Food quotes: shown at the bottom of every page -->
-    <footer class="quotes">
-      <p>“Good food is the quiet language of love.”</p>
-      <p>“Great gatherings begin with a full table.”</p>
-      <p>“Spice up the plate, warm up the room.”</p>
-    </footer>
-  </main>
-
-  <!-- Popup form used for adding and editing records -->
   <dialog id="modal">
-    <form id="form">
-      <h3 id="formTitle"></h3>
-      <div id="formFields"></div>
-      <div class="actions">
-        <button type="button" id="cancelBtn">Cancel</button>
-        <button type="submit" class="primary">Save</button>
-      </div>
+    <form id="modalForm">
+      <div id="modalContent"></div>
     </form>
+  </dialog>
+
+  <dialog id="notice">
+    <div id="noticeContent"></div>
   </dialog>
 
   <script src="script.js"></script>

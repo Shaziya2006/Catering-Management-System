@@ -130,6 +130,8 @@ body::after{
 /* ---------- Main area ---------- */
 main{
     flex: 1;
+    display: flex;
+    flex-direction: column;
     padding: 40px 36px;
     overflow-x: auto;
     opacity: 0;
@@ -145,6 +147,13 @@ main{
     justify-content: space-between;
     align-items: center;
     margin-bottom: 36px;
+}
+
+.welcome{
+    color: #ffb347;
+    font-size: 35px;
+    font-weight: 500;
+    margin-bottom: 6px;
 }
 
 main h2{
@@ -173,6 +182,32 @@ main h2{
 .primary:hover{
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+}
+
+/* content takes all the free space, so the quotes always sit at the bottom */
+#content{
+    flex: 1;
+}
+
+/* ---------- Food quotes (bottom of every page) ---------- */
+.quotes{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 50px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.quotes p{
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+    font-family: "DM Serif Display", Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.5;
+    color: #a99bb8;
 }
 
 /* ---------- Dashboard cards ---------- */
@@ -479,4 +514,3 @@ input:focus, select:focus{
         width: 100%;
     }
 }
-

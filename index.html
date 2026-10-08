@@ -3,30 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Anapoorna Catering</title>
+  <title>Annapoorna Catering</title>
+
+  <!-- Fonts: Poppins for text, DM Serif Display for headings -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- Sidebar: one button per page -->
   <aside class="sidebar">
-    <h1>Anapoorna Catering</h1>
+    <div class="brand">
+      <span class="logo">🍽️</span>
+      <h1>Annapoorna Catering</h1>
+      <p class="tagline">Catering manager</p>
+    </div>
+
     <nav id="nav">
-      <button data-page="dashboard" class="active">Dashboard</button>
-      <button data-page="customers">Customers</button>
-      <button data-page="menus">Menus</button>
-      <button data-page="events">Events</button>
-      <button data-page="orders">Orders</button>
-      <button data-page="payments">Payments</button>
+      <button data-page="dashboard" class="active"><span class="icon">📊</span> Dashboard</button>
+      <button data-page="customers"><span class="icon">👥</span> Customers</button>
+      <button data-page="menus"><span class="icon">🍛</span> Menus</button>
+      <button data-page="events"><span class="icon">🎉</span> Events</button>
+      <button data-page="orders"><span class="icon">🧾</span> Orders</button>
+      <button data-page="payments"><span class="icon">💳</span> Payments</button>
     </nav>
+
+    <p class="sidebar-note">Your data is saved in this browser.</p>
   </aside>
+
+  <!-- Main area: JS fills this depending on the selected page -->
   <main>
     <header class="top">
-      <h2 id="title"></h2>
+      <div>
+        <h2 id="title"></h2>
+        <p class="subtitle">Events, menus, orders and payments in one place.</p>
+      </div>
       <button id="addBtn" class="primary">+ Add new</button>
     </header>
     <section id="content"></section>
   </main>
 
+  <!-- Popup form used for adding and editing records -->
   <dialog id="modal">
     <form id="form">
       <h3 id="formTitle"></h3>

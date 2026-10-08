@@ -1,4 +1,4 @@
-
+/* ---------- General ---------- */
 *{
     margin: 0;
     padding: 0;
@@ -6,9 +6,10 @@
 }
 
 body{
-    background-color: black;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: #0f0816;
+    color: #f5eefa;
+    font-family: Poppins, Arial, sans-serif;
+    color-scheme: dark;
     display: flex;
     min-height: 100vh;
 }
@@ -16,25 +17,74 @@ body{
 button{
     cursor: pointer;
     font-size: 15px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Poppins, Arial, sans-serif;
 }
 
+/* ---------- Glowing background blobs ---------- */
+body::before{
+    content: "";
+    position: fixed;
+    top: -150px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    background-color: #ff6b9d;
+    opacity: 0.25;
+    border-radius: 50%;
+    filter: blur(110px);
+    z-index: -1;
+}
 
+body::after{
+    content: "";
+    position: fixed;
+    bottom: -180px;
+    left: 200px;
+    width: 550px;
+    height: 550px;
+    background-color: #ffb347;
+    opacity: 0.18;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+}
+
+/* ---------- Sidebar (floating glass panel) ---------- */
 .sidebar{
-    width: 230px;
-    height: 100vh;
+    width: 250px;
+    height: calc(100vh - 32px);
+    margin: 16px;
     position: sticky;
-    top: 0;
-    background-color: black;
-    border-right: 1px solid gray;
-    padding: 30px 20px;
+    top: 16px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 28px 18px;
+    backdrop-filter: blur(20px);
+}
+
+.brand{
+    margin-bottom: 36px;
+    padding-left: 8px;
+}
+
+.logo{
+    font-size: 32px;
 }
 
 .sidebar h1{
-    color: #f2a900;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 24px;
-    margin-bottom: 40px;
+    font-family: "DM Serif Display", Georgia, serif;
+    font-weight: normal;
+    font-size: 28px;
+    color: #ffb347;
+    margin-top: 8px;
+}
+
+.tagline{
+    font-size: 13px;
+    color: #a99bb8;
 }
 
 .sidebar nav{
@@ -44,30 +94,43 @@ button{
 
 .sidebar button{
     background-color: transparent;
-    color: #adb5bd;
+    color: #c9bdd6;
     border: none;
-    border-radius: 3px;
+    border-radius: 14px;
     text-align: left;
-    padding: 12px 14px;
-    margin-bottom: 8px;
+    padding: 13px 16px;
+    margin-bottom: 6px;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .sidebar button:hover{
-    background-color: #1a1a1a;
+    background-color: rgba(255, 255, 255, 0.08);
     color: white;
 }
 
-
-.sidebar button.active{
-    background-color: #f2a900;
-    color: black;
-    font-weight: bold;
+.icon{
+    display: inline-block;
+    width: 28px;
 }
 
+/* the page you are currently on */
+.sidebar button.active{
+    background-image: linear-gradient(135deg, #ffb347, #ff6b9d);
+    color: #1a0b22;
+    font-weight: 600;
+}
 
+.sidebar-note{
+    margin-top: auto;
+    padding-left: 8px;
+    font-size: 12px;
+    color: #a99bb8;
+}
+
+/* ---------- Main area ---------- */
 main{
     flex: 1;
-    padding: 40px;
+    padding: 40px 36px;
     overflow-x: auto;
     opacity: 0;
     animation-name: opachange;
@@ -81,183 +144,225 @@ main{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 36px;
 }
 
 main h2{
-    color: white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 40px;
+    font-family: "DM Serif Display", Georgia, serif;
+    font-weight: normal;
+    font-size: 46px;
 }
 
+.subtitle{
+    color: #a99bb8;
+    font-size: 14px;
+    margin-top: 4px;
+}
 
+/* Add new / Save button */
 .primary{
-    background-color: #f2a900;
-    color: black;
-    border: 1px solid #f2a900;
-    border-radius: 3px;
-    padding: 12px 22px;
-    font-weight: bold;
+    background-image: linear-gradient(135deg, #ffb347, #ff6b9d);
+    color: #1a0b22;
+    border: none;
+    border-radius: 30px;
+    padding: 13px 26px;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .primary:hover{
-    animation-name: change;
-    animation-duration: 0.2s;
-    animation-timing-function: ease-out;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
 }
 
-
+/* ---------- Dashboard cards ---------- */
 .cards{
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 22px;
 }
 
 .card{
-    height: 180px;
+    height: 170px;
     width: 230px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid gray;
-    border-left: 5px solid #f2a900;
-    border-radius: 15px;
-    padding: 25px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 22px;
+    transition: transform 0.25s, border-color 0.25s;
 }
 
 .card:hover{
-    animation-name: colorfill;
-    animation-duration: 0.8s;
-    animation-timing-function: ease-out;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    transform: translateY(-6px);
+    border-color: rgba(255, 179, 71, 0.7);
 }
 
 .card span{
-    font-size: 15px;
-    opacity: 0.7;
+    font-size: 14px;
+    color: #c9bdd6;
 }
 
 .card strong{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 32px;
+    font-family: "DM Serif Display", Georgia, serif;
+    font-weight: normal;
+    font-size: 38px;
 }
 
-/* ---------- Tables ---------- */
+/* every card gets its own colour */
+.card:nth-child(1){
+    background-image: linear-gradient(145deg, rgba(157, 140, 255, 0.3), rgba(255, 255, 255, 0.03));
+}
+.card:nth-child(2){
+    background-image: linear-gradient(145deg, rgba(255, 107, 157, 0.28), rgba(255, 255, 255, 0.03));
+}
+.card:nth-child(3){
+    background-image: linear-gradient(145deg, rgba(255, 179, 71, 0.28), rgba(255, 255, 255, 0.03));
+}
+.card:nth-child(4){
+    background-image: linear-gradient(145deg, rgba(91, 224, 179, 0.25), rgba(255, 255, 255, 0.03));
+}
+.card:nth-child(5){
+    background-image: linear-gradient(145deg, rgba(255, 107, 107, 0.28), rgba(255, 255, 255, 0.03));
+}
+
+/* ---------- Tables (every row is a rounded strip) ---------- */
 table{
     width: 100%;
-    border-collapse: collapse;
-    border: 1px solid gray;
-}
-
-th, td{
-    padding: 16px;
-    text-align: left;
-    border-bottom: 1px solid #333333;
+    border-collapse: separate;
+    border-spacing: 0 10px;
 }
 
 th{
-    background-color: #1a1a1a;
-    color: #f2a900;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: left;
+    padding: 0 16px 4px 16px;
+    font-weight: 500;
     font-size: 14px;
+    color: #a99bb8;
+}
+
+td{
+    padding: 16px;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+td:first-child{
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px 0 0 16px;
+}
+
+td:last-child{
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0 16px 16px 0;
 }
 
 tr:hover td{
-    background-color: #111111;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Edit and Delete buttons inside the table */
 td button{
     background-color: transparent;
     color: white;
-    border: 1px solid gray;
-    border-radius: 3px;
-    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    padding: 6px 16px;
     margin-right: 8px;
+    font-size: 13px;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 td button:hover{
-    animation-name: change;
-    animation-duration: 0.2s;
-    animation-timing-function: ease-out;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
+    background-color: white;
+    color: #1a0b22;
 }
 
 td button.del{
-    color: #ff6b6b;
+    color: #ff8fa3;
+    border-color: rgba(255, 143, 163, 0.5);
 }
 
 td button.del:hover{
-    animation-name: changered;
+    background-color: #ff8fa3;
+    color: #1a0b22;
 }
 
 .paid{
-    color: #51cf66;
-    font-weight: bold;
+    color: #5be0b3;
+    font-weight: 600;
 }
 
 .due{
-    color: #ff6b6b;
-    font-weight: bold;
+    color: #ff8fa3;
+    font-weight: 600;
 }
 
 .empty{
-    padding: 60px;
+    padding: 70px 20px;
     text-align: center;
-    color: #adb5bd;
-    border: 1px dashed gray;
-    border-radius: 15px;
+    color: #a99bb8;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    border-radius: 24px;
 }
 
 /* ---------- Popup form ---------- */
 dialog{
-    background-color: black;
-    color: white;
-    border: 1px solid gray;
-    border-radius: 15px;
-    padding: 30px;
-    width: 420px;
+    background-color: #1a1024;
+    color: #f5eefa;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    padding: 32px;
+    width: 440px;
     max-width: 92%;
     margin: auto;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
 }
 
 dialog::backdrop{
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(10, 4, 16, 0.7);
+    backdrop-filter: blur(6px);
 }
 
 dialog h3{
-    color: white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-family: "DM Serif Display", Georgia, serif;
+    font-weight: normal;
+    font-size: 28px;
+    margin-bottom: 22px;
 }
 
 label{
     display: block;
-    color: #adb5bd;
+    color: #a99bb8;
     font-size: 14px;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 input, select{
     width: 100%;
     margin-top: 6px;
-    padding: 12px;
-    background-color: #111111;
+    padding: 13px 14px;
+    background-color: rgba(255, 255, 255, 0.06);
     color: white;
-    border: 1px solid gray;
-    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
     font-size: 15px;
+    font-family: Poppins, Arial, sans-serif;
+}
+
+select option{
+    background-color: #1a1024;
+    color: white;
 }
 
 input:focus, select:focus{
     outline: none;
-    border: 1px solid #f2a900;
+    border: 1px solid #ffb347;
+    box-shadow: 0 0 0 3px rgba(255, 179, 71, 0.2);
 }
 
 .actions{
@@ -270,48 +375,36 @@ input:focus, select:focus{
 .actions button[type="button"]{
     background-color: transparent;
     color: white;
-    border: 1px solid gray;
-    border-radius: 3px;
-    padding: 12px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 30px;
+    padding: 13px 26px;
 }
 
-/* ---------- Animations (same idea as your file) ---------- */
-
-/* button fills white on hover */
-@keyframes change{
-    from{
-        background-color: transparent;
-        color: white;
-    }
-    to{
-        background-color: white;
-        color: black;
-    }
+.actions button[type="button"]:hover{
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* delete button fills red on hover */
-@keyframes changered{
-    from{
-        background-color: transparent;
-        color: #ff6b6b;
-    }
-    to{
-        background-color: #ff6b6b;
-        color: black;
-    }
+/* ---------- Error popup (Insufficient balance etc.) ---------- */
+#messageBox{
+    width: 390px;
+    border: 1px solid rgba(255, 107, 107, 0.6);
+    animation-name: popup;
+    animation-duration: 0.25s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
 }
 
-/* dashboard card fills white on hover */
-@keyframes colorfill{
-    from{
-        background-color: rgba(255, 255, 255, 0.1);
-        color: white;
-    }
-    to{
-        background-color: white;
-        color: black;
-    }
+#messageBox h3{
+    color: #ff8fa3;
 }
+
+#messageBox p{
+    color: #c9bdd6;
+    line-height: 1.6;
+    margin-bottom: 22px;
+}
+
+/* ---------- Animations ---------- */
 
 /* page fades in when it loads */
 @keyframes opachange{
@@ -323,55 +416,7 @@ input:focus, select:focus{
     }
 }
 
-/* ---------- Mobile view ---------- */
-@media (max-width: 700px){
-    body{
-        flex-direction: column;
-    }
-    .sidebar{
-        width: 100%;
-        height: auto;
-        position: static;
-        border-right: none;
-        border-bottom: 1px solid gray;
-        padding: 20px;
-    }
-    .sidebar h1{
-        margin-bottom: 15px;
-    }
-    .sidebar nav{
-        flex-direction: row;
-        overflow-x: auto;
-    }
-    main{
-        padding: 20px;
-    }
-    main h2{
-        font-size: 28px;
-    }
-}
-
-/* ---------- Error popup (used for "Insufficient balance" etc.) ---------- */
-#messageBox{
-    width: 380px;
-    border: 1px solid #ff6b6b;
-    animation-name: popup;
-    animation-duration: 0.25s;
-    animation-timing-function: ease-out;
-    animation-iteration-count: 1;
-}
-
-#messageBox h3{
-    color: #ff6b6b;
-}
-
-#messageBox p{
-    color: #adb5bd;
-    line-height: 1.5;
-    margin-bottom: 20px;
-}
-
-/* popup grows a little when it opens */
+/* error popup grows a little when it opens */
 @keyframes popup{
     from{
         transform: scale(0.8);
@@ -382,3 +427,56 @@ input:focus, select:focus{
         opacity: 1;
     }
 }
+
+/* people who turn off animations in their device settings get none */
+@media (prefers-reduced-motion: reduce){
+    main, #messageBox{
+        animation: none;
+        opacity: 1;
+    }
+    .card, .primary{
+        transition: none;
+    }
+}
+
+/* ---------- Mobile view ---------- */
+@media (max-width: 700px){
+    body{
+        flex-direction: column;
+    }
+    .sidebar{
+        width: auto;
+        height: auto;
+        position: static;
+        margin: 12px;
+        padding: 20px 14px;
+    }
+    .brand{
+        margin-bottom: 18px;
+    }
+    .sidebar nav{
+        flex-direction: row;
+        overflow-x: auto;
+    }
+    .sidebar button{
+        white-space: nowrap;
+    }
+    .sidebar-note{
+        display: none;
+    }
+    main{
+        padding: 20px 16px;
+    }
+    main h2{
+        font-size: 34px;
+    }
+    .top{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .card{
+        width: 100%;
+    }
+}
+
